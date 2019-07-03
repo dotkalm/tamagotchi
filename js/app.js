@@ -11,6 +11,9 @@ const alert = document.createElement('h1');
 const feedButton = document.createElement('button');
 const playButton = document.createElement('button');
 const sleepButton = document.createElement('button');
+const imgdoggie = document.createElement('img');
+imgdoggie.setAttribute('src', 'img/puppypix.gif');
+imgdoggie.setAttribute("id", "puppy-begin");
 
 class PuppyDoggie {
     constructor(name, hunger=0, sleepiness=0, boredom=0, age=0){
@@ -24,11 +27,8 @@ class PuppyDoggie {
     initPup(){
         const centerColumn = document.querySelector('#column2');
         const rightColumn = document.querySelector('#column3');
-
-        const imgdoggie = document.createElement('img');
-        imgdoggie.setAttribute('src', 'img/puppy.jpg');
-        imgdoggie.setAttribute("id", "puppy-begin");
-        centerColumn.appendChild(imgdoggie);
+        const puppersDiv = document.querySelector('#puppers');
+        puppersDiv.appendChild(imgdoggie);
         
         const newDoggie = document.createElement('h2');
         newDoggie.innerText = `Lil ${this.name}`;
@@ -61,12 +61,30 @@ class PuppyDoggie {
     startSleepiness(){
         sleepButton.addEventListener('click', e => {
             sleepiness.innerText = `Sleepiness: 0`;
-            this.sleepiness = 0;
+            imgdoggie.setAttribute('src', 'img/puppysleep.gif');
+            clearInterval(soSleepy)
+
           });
+        
+
         const soSleepy = setInterval(() => {
             this.sleepiness ++;
+            if(this.sleepiness === 5){
+                // const nav = document.querySelector('nav');
+                // alert.innerText = `WOOF WOOF lil ${this.name} is getting sleepy!!`;   
+                // nav.appendChild(alert)
+                imgdoggie.setAttribute('src', 'img/puppyvsleepy.gif');
+
+            }
             sleepiness.innerText = `Sleepiness: ${this.sleepiness}`;
-        }, 6450);
+        }, 4500);
+
+        
+        // if(this.hunger === 10){
+        //     const nav = document.querySelector('nav');
+        //     alert.innerText = `So sad! ... lil ${this.name} died from hunger`;   
+        //     nav.appendChild(alert)
+        // }
         
     }   
     startAging(){
