@@ -27,7 +27,16 @@ nav{
  margin: 0 auto;
  padding: 1px;
 }
-
+#puppy-begin {
+    animation: test 15s infinite;
+}
+@keyframes test{
+    0% {transform: scale(1)}
+    20% {transform: scale(.9)}
+    50% {transform: scale(.85)}
+    80% {transform: scale(.9)}
+    100% {transform: scale(1.0)}
+}
 #column1 {
     background-color: #ffffff; 
     height: 400px;
