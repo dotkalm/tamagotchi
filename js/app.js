@@ -3,20 +3,20 @@ const leftColumn = document.querySelector('#column1');
 const age = document.createElement('h3');
 rightColumn.appendChild(age);
 const hunger = document.createElement('h3');
+const boredom = document.createElement('h3');
+rightColumn.appendChild(boredom);
 const alert = document.createElement('h1');
 const feedButton = document.createElement('button');
+const playButton = document.createElement('button');
 
 class PuppyDoggie {
-    constructor(name, hunger=0, sleepiness=1, boredom=1, age=0){
+    constructor(name, hunger=0, sleepiness=0, boredom=0, age=0){
         this.name = name;
         this.hunger = hunger;
         this.sleepiness = sleepiness;
         this.boredom = boredom;
         this.age = age;
-        feedButton.addEventListener('click', e => {
-            console.log(this); 
-            this.hunger = 0;
-          });
+        
     }
     initPup(){
         const centerColumn = document.querySelector('#column2');
@@ -34,13 +34,19 @@ class PuppyDoggie {
         rightColumn.appendChild(hunger);
         hunger.innerText = `Hunger: ${this.hunger}`;
         age.innerText = `Age: ${this.age}`;
+        boredom.innerText = `Boredom: ${this.boredom}`;
         
         leftColumn.appendChild(feedButton);
         feedButton.setAttribute('type', 'button');
         feedButton.innerText = `Feed Lil ${this.name}`
 
+        leftColumn.appendChild(playButton);
+        playButton.setAttribute('type', 'button');
+        playButton.innerText = `Play with lil ${this.name}`
+
         this.startAging();
         this.startGettingHungry();
+        this.startBoredom()
     }
     startAging(){
         const doggieAge = setInterval(() => {
@@ -49,20 +55,47 @@ class PuppyDoggie {
         }, 10000);
       }
     startGettingHungry(){
+        feedButton.addEventListener('click', e => {
+            console.log(this); 
+            hunger.innerText = `Hunger: 0`;
+            this.hunger = 0;
+          });
         const dogHungry = setInterval(() => {
             this.hunger ++;
-            if(this.hunger === 8){
-                const nav = document.querySelector('nav');
-                alert.innerText = `WOOF WOOF feed lil ${this.name} they are getting HUNGRY!!`;   
-                nav.appendChild(alert)
-            }
-            if(this.hunger === 10){
-                const nav = document.querySelector('nav');
-                alert.innerText = `So so sad! ... lil ${this.name} died from hunger`;   
-                nav.appendChild(alert)
-            }
+            // if(this.hunger === 8){
+            //     const nav = document.querySelector('nav');
+            //     alert.innerText = `WOOF WOOF feed lil ${this.name} they are getting HUNGRY!!`;   
+            //     nav.appendChild(alert)
+            // }
+            // if(this.hunger === 10){
+            //     const nav = document.querySelector('nav');
+            //     alert.innerText = `So sad! ... lil ${this.name} died from hunger`;   
+            //     nav.appendChild(alert)
+            // }
             hunger.innerText = `Hunger: ${this.hunger}`;
-        }, 1100);
+        }, 5100);
+        
+    }
+    startBoredom(){
+        playButton.addEventListener('click', e => {
+            console.log(this); 
+            boredom.innerText = `Boredom: 0`;
+            this.boredom = 0;
+          });
+        const boredToDeath = setInterval(() => {
+            this.boredom ++;
+            // if(this.boredom === 8){
+            //     const nav = document.querySelector('nav');
+            //     alert.innerText = `lil ${this.name} is so bored!!`;   
+            //     nav.appendChild(alert)
+            // }
+            // if(this.boredom === 10){
+            //     const nav = document.querySelector('nav');
+            //     alert.innerText = `Sad! lil ${this.name} died from boredom`;   
+            //     nav.appendChild(alert)
+            // }
+            boredom.innerText = `Boredom: ${this.boredom}`;
+        }, 6000);
         
     }
 }
