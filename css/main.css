@@ -33,6 +33,7 @@ nav{
     height: 400px;
     margin: 0 auto;
     padding: 5px;
+    text-align: right;
 }
 #column2 {
     background-color: #ffffff;

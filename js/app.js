@@ -1,16 +1,22 @@
 const rightColumn = document.querySelector('#column3');
+const leftColumn = document.querySelector('#column1');
 const age = document.createElement('h3');
 rightColumn.appendChild(age);
 const hunger = document.createElement('h3');
-
+const alert = document.createElement('h1');
+const feedButton = document.createElement('button');
 
 class PuppyDoggie {
-    constructor(name, hunger=1, sleepiness=1, boredom=1, age=0){
+    constructor(name, hunger=0, sleepiness=1, boredom=1, age=0){
         this.name = name;
         this.hunger = hunger;
         this.sleepiness = sleepiness;
         this.boredom = boredom;
         this.age = age;
+        feedButton.addEventListener('click', e => {
+            console.log(this); 
+            this.hunger = 0;
+          });
     }
     initPup(){
         const centerColumn = document.querySelector('#column2');
@@ -28,8 +34,13 @@ class PuppyDoggie {
         rightColumn.appendChild(hunger);
         hunger.innerText = `Hunger: ${this.hunger}`;
         age.innerText = `Age: ${this.age}`;
+        
+        leftColumn.appendChild(feedButton);
+        feedButton.setAttribute('type', 'button');
+        feedButton.innerText = `Feed Lil ${this.name}`
+
         this.startAging();
-        this.startGettingHungry()
+        this.startGettingHungry();
     }
     startAging(){
         const doggieAge = setInterval(() => {
@@ -40,8 +51,19 @@ class PuppyDoggie {
     startGettingHungry(){
         const dogHungry = setInterval(() => {
             this.hunger ++;
+            if(this.hunger === 8){
+                const nav = document.querySelector('nav');
+                alert.innerText = `WOOF WOOF feed lil ${this.name} they are getting HUNGRY!!`;   
+                nav.appendChild(alert)
+            }
+            if(this.hunger === 10){
+                const nav = document.querySelector('nav');
+                alert.innerText = `So so sad! ... lil ${this.name} died from hunger`;   
+                nav.appendChild(alert)
+            }
             hunger.innerText = `Hunger: ${this.hunger}`;
-        }, 11000);
+        }, 1100);
+        
     }
 }
 
@@ -59,7 +81,4 @@ document.querySelectorAll('input')[1].addEventListener('click', e => {
     
   });
 
-const beginLife = {
-
-}
 
