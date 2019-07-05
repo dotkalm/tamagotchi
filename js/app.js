@@ -16,12 +16,14 @@ imgdoggie.setAttribute('src', 'img/puppypix.gif');
 imgdoggie.setAttribute("id", "puppy-begin");
 
 class PuppyDoggie {
-    constructor(name, hunger=0, sleepiness=0, boredom=0, age=0){
+    constructor(name, hunger=0, sleepiness=0, boredom=0, age=0, bedTime=0, mealTime=0){
         this.name = name;
         this.hunger = hunger;
         this.sleepiness = sleepiness;
         this.boredom = boredom;
         this.age = age;
+        this.bedTime = bedTime;
+        this.mealTime = mealTime;
         
     }
     initPup(){
@@ -51,7 +53,7 @@ class PuppyDoggie {
 
         leftColumn.appendChild(sleepButton);
         sleepButton.setAttribute('type', 'button');
-        sleepButton.innerText = `got to sleep lil ${this.name}`
+        sleepButton.innerText = `go to sleep lil ${this.name}`
 
         this.startAging();
         this.startGettingHungry();
@@ -62,58 +64,82 @@ class PuppyDoggie {
         sleepButton.addEventListener('click', e => {
             sleepiness.innerText = `Sleepiness: 0`;
             imgdoggie.setAttribute('src', 'img/puppysleep.gif');
-            clearInterval(soSleepy)
-
+            clearInterval(soSleepy);
+            const doggieSleep = setInterval(() => {
+                const i = this.bedTime
+                this.bedTime ++;
+                console.log(`puppy sleeping ${this.bedTime}`);
+                console.log(i)
+                if(this.bedTime===i+1){
+                    clearInterval(soSleepy);
+                    this.startSleepiness();
+                    clearInterval(doggieSleep);
+                    imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                    this.sleepiness = 0
+                }
+                }, 5000);
           });
-        
-
         const soSleepy = setInterval(() => {
-            this.sleepiness ++;
+            this.sleepiness++
             if(this.sleepiness === 5){
                 // const nav = document.querySelector('nav');
-                // alert.innerText = `WOOF WOOF lil ${this.name} is getting sleepy!!`;   
+                // alert.innerText = `WOOF WOOF lil ${this.name} is getting sleepy!!`; 
                 // nav.appendChild(alert)
-                imgdoggie.setAttribute('src', 'img/puppyvsleepy.gif');
-
+                imgdoggie.setAttribute('src', 'img/puppysleepy.gif');
             }
             sleepiness.innerText = `Sleepiness: ${this.sleepiness}`;
-        }, 4500);
-
-        
-        // if(this.hunger === 10){
-        //     const nav = document.querySelector('nav');
-        //     alert.innerText = `So sad! ... lil ${this.name} died from hunger`;   
-        //     nav.appendChild(alert)
-        // }
-        
+        }, 5000);
     }   
+  
     startAging(){
         const doggieAge = setInterval(() => {
             this.age ++;
             age.innerText = `Age: ${this.age}`;
-        }, 100009);
+        }, 1009);
       }
+    // startGettingHungry(){
+    //     feedButton.addEventListener('click', e => {
+    //         hunger.innerText = `Hunger: 0`;
+    //         this.hunger = 0;
+    //         imgdoggie.setAttribute('src', 'img/puppyeating.gif');
+
+    //       });
+    //     const dogHungry = setInterval(() => {
+    //         this.hunger ++;
+    //         hunger.innerText = `Hunger: ${this.hunger}`;
+    //     }, 5100);
+    // }
     startGettingHungry(){
         feedButton.addEventListener('click', e => {
             hunger.innerText = `Hunger: 0`;
-            this.hunger = 0;
+            imgdoggie.setAttribute('src', 'img/puppyeating.gif');
+            clearInterval(soHungry);
+            const dogEating = setInterval(() => {
+                const i = this.mealTime
+                this.hunger ++;
+                console.log(`yum ${i}`);
+                console.log(i)
+                if(this.mealTime===i+1){
+                    clearInterval(soHungry);
+                    this.startGettingHungry();
+                    clearInterval(mealTime);
+                    imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                    this.hunger = 0
+                }
+                }, 5000);
           });
-        const dogHungry = setInterval(() => {
-            this.hunger ++;
-            // if(this.hunger === 8){
-            //     const nav = document.querySelector('nav');
-            //     alert.innerText = `WOOF WOOF feed lil ${this.name} they are getting HUNGRY!!`;   
-            //     nav.appendChild(alert)
-            // }
-            // if(this.hunger === 10){
-            //     const nav = document.querySelector('nav');
-            //     alert.innerText = `So sad! ... lil ${this.name} died from hunger`;   
-            //     nav.appendChild(alert)
-            // }
+        const soHungry = setInterval(() => {
+            this.hunger++
+            if(this.hunger === 5){
+                const nav = document.querySelector('nav');
+                alert.innerText = `WOOF WOOF lil ${this.name} is hungry!!`; 
+                nav.appendChild(alert)
+                // imgdoggie.setAttribute('src', 'img/puppysleepy.gif');
+            }
             hunger.innerText = `Hunger: ${this.hunger}`;
-        }, 5100);
-        
-    }
+        }, 5000);
+    } 
+    
     startBoredom(){
         playButton.addEventListener('click', e => {
             boredom.innerText = `Boredom: 0`;
@@ -125,6 +151,7 @@ class PuppyDoggie {
         }, 6000);
         
     }
+    
     
 }
 
