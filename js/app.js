@@ -111,20 +111,23 @@ class PuppyDoggie {
     // }
     startGettingHungry(){
         feedButton.addEventListener('click', e => {
+            alert.innerText = ``; 
             hunger.innerText = `Hunger: 0`;
             imgdoggie.setAttribute('src', 'img/puppyeating.gif');
             clearInterval(soHungry);
             const dogEating = setInterval(() => {
                 const i = this.mealTime
-                this.hunger ++;
-                console.log(`yum ${i}`);
+                this.mealTime ++;
+                console.log(`yum ${this.mealTime}`);
                 console.log(i)
                 if(this.mealTime===i+1){
                     clearInterval(soHungry);
                     this.startGettingHungry();
-                    clearInterval(mealTime);
+                    clearInterval(dogEating);
                     imgdoggie.setAttribute('src', 'img/puppypix.gif');
                     this.hunger = 0
+                    
+
                 }
                 }, 5000);
           });
