@@ -2,7 +2,7 @@ const rightColumn = document.querySelector('#column3');
 const leftColumn = document.querySelector('#column1');
 const age = document.createElement('h3');
 rightColumn.appendChild(age);
-const hunger = document.createElement('h3');
+const hungerEl = document.createElement('h3');
 const boredom = document.createElement('h3');
 const sleepiness = document.createElement('h3');
 rightColumn.appendChild(sleepiness);
@@ -14,7 +14,14 @@ const sleepButton = document.createElement('button');
 const imgdoggie = document.createElement('img');
 imgdoggie.setAttribute('src', 'img/puppypix.gif');
 imgdoggie.setAttribute("id", "puppy-begin");
+let sleepBoolean = false;
+let timerCounter = 0;
 
+
+
+
+
+    
 class PuppyDoggie {
     constructor(name, hunger=0, sleepiness=0, boredom=0, age=0, bedTime=0, mealTime=0){
         this.name = name;
@@ -23,8 +30,7 @@ class PuppyDoggie {
         this.boredom = boredom;
         this.age = age;
         this.bedTime = bedTime;
-        this.mealTime = mealTime;
-        
+        this.mealTime = mealTime;        
     }
     initPup(){
         const centerColumn = document.querySelector('#column2');
@@ -36,12 +42,11 @@ class PuppyDoggie {
         newDoggie.innerText = `Lil ${this.name}`;
         centerColumn.appendChild(newDoggie);
         
-        
-        rightColumn.appendChild(hunger);
-        hunger.innerText = `Hunger: ${this.hunger}`;
+        rightColumn.appendChild(hungerEl);
+        hungerEl.innerText = `Hunger: ${this.hunger}`;
         age.innerText = `Age: ${this.age}`;
         boredom.innerText = `Boredom: ${this.boredom}`;
-        sleepiness.innerText = `Sleepiness: ${this.sleepiness}`
+        sleepiness.innerText = `Sleepiness: ${timerCounter}`
 
         leftColumn.appendChild(feedButton);
         feedButton.setAttribute('type', 'button');
@@ -53,7 +58,7 @@ class PuppyDoggie {
 
         leftColumn.appendChild(sleepButton);
         sleepButton.setAttribute('type', 'button');
-        sleepButton.innerText = `go to sleep lil ${this.name}`
+        sleepButton.innerText = `got to sleep lil ${this.name}`
 
         this.startAging();
         this.startGettingHungry();
@@ -61,58 +66,47 @@ class PuppyDoggie {
         this.startSleepiness()
     }
     startSleepiness(){
+        let myTimer = setInterval(() => {
+            const i = timerCounter
+            timerCounter ++;
+            console.log(`${timerCounter} <- timer counter  `);
+            console.log(`${i} <-- I`)
+            sleepiness.innerText = `Sleepiness: ${timerCounter}`
+
+            }, 250);;
+
         sleepButton.addEventListener('click', e => {
-            sleepiness.innerText = `Sleepiness: 0`;
-            imgdoggie.setAttribute('src', 'img/puppysleep.gif');
-            clearInterval(soSleepy);
-            const doggieSleep = setInterval(() => {
-                const i = this.bedTime
-                this.bedTime ++;
-                console.log(`puppy sleeping ${this.bedTime}`);
-                console.log(i)
-                if(this.bedTime===i+1){
-                    clearInterval(soSleepy);
-                    this.startSleepiness();
-                    clearInterval(doggieSleep);
-                    imgdoggie.setAttribute('src', 'img/puppypix.gif');
-                    this.sleepiness = 0
+            
+            if (myTimer === -1){
+                myTimer = setInterval(() => {
+                    const i = timerCounter
+                    timerCounter ++;
+                    console.log(`${timerCounter} <- timer counter  `);
+                    sleepiness.innerText = `Sleepiness: ${timerCounter}`
+                    console.log(`${i} <-- I`)
+                    }, 250);
+            } else { 
+                timerCounter = 0;
+                sleepiness.innerText = `Sleepiness: ${timerCounter}`
+                clearInterval(myTimer);
+                myTimer = -1
+                
                 }
-                }, 5000);
+                
           });
-        const soSleepy = setInterval(() => {
-            this.sleepiness++
-            if(this.sleepiness === 5){
-                // const nav = document.querySelector('nav');
-                // alert.innerText = `WOOF WOOF lil ${this.name} is getting sleepy!!`; 
-                // nav.appendChild(alert)
-                imgdoggie.setAttribute('src', 'img/puppysleepy.gif');
-            }
-            sleepiness.innerText = `Sleepiness: ${this.sleepiness}`;
-        }, 5000);
+          
+        
     }   
-  
     startAging(){
         const doggieAge = setInterval(() => {
             this.age ++;
             age.innerText = `Age: ${this.age}`;
         }, 1009);
       }
-    // startGettingHungry(){
-    //     feedButton.addEventListener('click', e => {
-    //         hunger.innerText = `Hunger: 0`;
-    //         this.hunger = 0;
-    //         imgdoggie.setAttribute('src', 'img/puppyeating.gif');
-
-    //       });
-    //     const dogHungry = setInterval(() => {
-    //         this.hunger ++;
-    //         hunger.innerText = `Hunger: ${this.hunger}`;
-    //     }, 5100);
-    // }
-    startGettingHungry(){
+      startGettingHungry(){
         feedButton.addEventListener('click', e => {
             alert.innerText = ``; 
-            hunger.innerText = `Hunger: 0`;
+            // hungerEl.innerText = `Hunger: 0`;
             imgdoggie.setAttribute('src', 'img/puppyeating.gif');
             clearInterval(soHungry);
             const dogEating = setInterval(() => {
@@ -139,7 +133,7 @@ class PuppyDoggie {
                 nav.appendChild(alert)
                 // imgdoggie.setAttribute('src', 'img/puppysleepy.gif');
             }
-            hunger.innerText = `Hunger: ${this.hunger}`;
+            hungerEl.innerText = `Hunger: ${this.hunger}`;
         }, 5000);
     } 
     
@@ -171,5 +165,3 @@ document.querySelectorAll('input')[1].addEventListener('click', e => {
     
     
   });
-
-
