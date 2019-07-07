@@ -28,13 +28,13 @@ nav{
  padding: 1px;
 }
 #puppy-begin {
-    animation: test 20s infinite;
+    animation: test 5s infinite;
     max-height: 300px
 }
 @keyframes test{
     0% {transform: scale(1);}
-    50% {transform: scale(.85);}
-    100% {transform: scale(1.0)}
+    50% {transform: scale(.98, 1.06);}
+    85% {transform: scale(1.0)}
 }
 #puppy-feed {
     animation: feed 5s infinite;
@@ -64,7 +64,7 @@ nav{
 }
 #puppers{
     animation: pulse 15s infinite;
-    max-width: 300px
+    max-width: 300px;
     margin: 0 auto;
     
 }

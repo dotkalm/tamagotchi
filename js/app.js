@@ -58,13 +58,15 @@ class PuppyDoggie {
         this.startGettingHungry();
         this.startGettingBored();
         this.startAging();
+        this.pickImage();
     }
     startSleepiness(){
         let myTimer = setInterval(() => {
             const i = timerCounter
             timerCounter ++;
             sleepiness.innerText = `Sleepiness: ${timerCounter}`
-            }, 15000);
+            }, 6000);
+            
         sleepButton.addEventListener('click', e => {
                 timerCounter = 0;
                 sleepiness.innerText = `Sleepiness: ${timerCounter}`
@@ -75,9 +77,9 @@ class PuppyDoggie {
                     myTimer = setInterval(() => {
                         const i = timerCounter
                         timerCounter ++;
-                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        // imgdoggie.setAttribute('src', 'img/puppypix.gif');
                         sleepiness.innerText = `Sleepiness: ${timerCounter}`
-                        }, 15000);
+                        }, 6000);
                 }, 5000)
           });
     }   
@@ -86,7 +88,7 @@ class PuppyDoggie {
             const i = hungerTimerCounter;
             hungerTimerCounter ++;
             hungerEl.innerText = `Hunger: ${hungerTimerCounter}`;
-            }, 15000);
+            }, 6000);
         feedButton.addEventListener('click', e => {
                 hungerTimerCounter = 0;
                 hungerEl.innerText = `Hunger: ${hungerTimerCounter}`
@@ -97,9 +99,9 @@ class PuppyDoggie {
                     hungerTimer = setInterval(() => {
                         const i = hungerTimerCounter;
                         hungerTimerCounter ++;
-                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        // imgdoggie.setAttribute('src', 'img/puppypix.gif');
                         hungerEl.innerText = `Hunger: ${hungerTimerCounter}`
-                    }, 15000);
+                    }, 6000);
                 }, 5000)
         });
     }
@@ -108,7 +110,10 @@ class PuppyDoggie {
             const i = boredTimerCounter;
             boredTimerCounter ++;
             boredom.innerText = `Boredom: ${boredTimerCounter}`;
-            }, 15000);
+            // if (boredTimerCounter >= 1){
+            //     imgdoggie.setAttribute('src', 'img/puppyBored.gif');
+            // }
+            }, 6000);
         playButton.addEventListener('click', e => {
                 boredTimerCounter = 0;
                 boredom.innerText = `Boredom: ${boredTimerCounter}`
@@ -119,11 +124,15 @@ class PuppyDoggie {
                     boredTimer = setInterval(() => {
                         const i = boredTimerCounter;
                         boredTimerCounter ++;
-                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        // if (boredTimerCounter >= 1){
+                        //     imgdoggie.setAttribute('src', 'img/puppyBored.gif');
+                        // } else {imgdoggie.setAttribute('src', 'img/puppypix.gif');}
+                        
                         boredom.innerText=`Boredom: ${boredTimerCounter}`
-                    }, 15000)
+                        
+                    }, 6000)
                     
-                }, 5000)
+                }, 1000)
 
         });
     }
@@ -131,18 +140,32 @@ class PuppyDoggie {
         const doggieAge = setInterval(() => {
             this.age ++;
             age.innerText = `Age: ${this.age}`;
-        }, 20000);
+        }, 60000);
       }
+    pickImage(){
+        const imagePicker = setInterval(() => {
+            if (boredTimerCounter >= 5){
+                imgdoggie.setAttribute('src', 'img/puppyBored.gif');
+            } else {imgdoggie.setAttribute('src', 'img/puppypix.gif');}
+        }, 5000)
+    }
+    // imgPicker(){
+
+    //     // if properties increase too much puppy images change
+
+    //     const startImagePicker = setInterval(() => {
+
+    //     if (){}
+    //     }, 100)
+    // }
     
     
 }
 
 
 document.querySelectorAll('input')[1].addEventListener('click', e => {
-    // console.log('puppy doggie')
     e.preventDefault();
     const puppy = new PuppyDoggie(document.querySelector('input').value) ;
-    console.log(puppy.name);
     const submitButton = document.querySelector('form');
     submitButton.style.display = 'none';
     puppy.initPup();
