@@ -57,6 +57,7 @@ class PuppyDoggie {
         this.startSleepiness();
         this.startGettingHungry();
         this.startGettingBored();
+        this.startAging();
     }
     startSleepiness(){
         let myTimer = setInterval(() => {
@@ -126,7 +127,12 @@ class PuppyDoggie {
 
         });
     }
-    
+    startAging(){
+        const doggieAge = setInterval(() => {
+            this.age ++;
+            age.innerText = `Age: ${this.age}`;
+        }, 20000);
+      }
     
     
 }
