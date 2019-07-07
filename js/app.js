@@ -140,12 +140,17 @@ class PuppyDoggie {
         const doggieAge = setInterval(() => {
             this.age ++;
             age.innerText = `Age: ${this.age}`;
-        }, 60000);
+        }, 600);
       }
     pickImage(){
         const imagePicker = setInterval(() => {
             if (boredTimerCounter >= 5){
                 imgdoggie.setAttribute('src', 'img/puppyBored.gif');
+            } 
+            else if (this.age >= 5 && this.age < 10){
+                imgdoggie.setAttribute('src', 'img/olderPup.gif');
+            } else if (this.age >= 10){
+                imgdoggie.setAttribute('src', 'img/oldestPup.gif');
             } else {imgdoggie.setAttribute('src', 'img/puppypix.gif');}
         }, 5000)
     }
