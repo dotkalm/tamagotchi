@@ -2,6 +2,7 @@ h1 {
     text-align: center;
     font-family: 'Inconsolata', monospace;
 }
+
 h3 {
     color: rgba(209, 103, 100, 1);
 }
@@ -10,26 +11,28 @@ body {
     padding: 0;
 }
 nav{
-    height: 100px;
     padding: 20px
 }
 .wrapper {
     margin: 0 auto;
     padding: 1px;
     background-color: white;
-    width: 100%;
-    height: 410px;
+    display: flex;
 }
 .column {
- width: 32.5%;
+ 
  float: left;
  font-size: 1.5em;
  margin: 0 auto;
  padding: 1px;
+ 
+ 
 }
 #puppy-begin {
     animation: test 5s infinite;
-    max-height: 300px
+    max-height: 300px;
+    margin: 0px;
+    
 }
 @keyframes test{
     0% {transform: scale(1);}
@@ -49,6 +52,7 @@ nav{
 }
 
 #column1 {
+    width: 10%;
     background-color: #ffffff; 
     height: 400px;
     margin: 0 auto;
@@ -56,11 +60,14 @@ nav{
     text-align: right;
 }
 #column2 {
-    background-color: #ffffff;
+    width: 70%;
     height: 400px;
     margin: 0 auto;
     padding: 5px;
     text-align: center;
+    display: contents;
+    flex-direction: row;
+    
 }
 #puppers{
     animation: pulse 15s infinite;
