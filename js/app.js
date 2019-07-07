@@ -16,21 +16,15 @@ imgdoggie.setAttribute('src', 'img/puppypix.gif');
 imgdoggie.setAttribute("id", "puppy-begin");
 let sleepBoolean = false;
 let timerCounter = 0;
-
-
-
-
-
-    
+let hungerTimerCounter = 0;
+let boredTimerCounter = 0;
 class PuppyDoggie {
     constructor(name, hunger=0, sleepiness=0, boredom=0, age=0, bedTime=0, mealTime=0){
         this.name = name;
         this.hunger = hunger;
         this.sleepiness = sleepiness;
         this.boredom = boredom;
-        this.age = age;
-        this.bedTime = bedTime;
-        this.mealTime = mealTime;        
+        this.age = age;     
     }
     initPup(){
         const centerColumn = document.querySelector('#column2');
@@ -43,7 +37,7 @@ class PuppyDoggie {
         centerColumn.appendChild(newDoggie);
         
         rightColumn.appendChild(hungerEl);
-        hungerEl.innerText = `Hunger: ${this.hunger}`;
+        hungerEl.innerText = `Hunger: ${hungerTimerCounter}`;
         age.innerText = `Age: ${this.age}`;
         boredom.innerText = `Boredom: ${this.boredom}`;
         sleepiness.innerText = `Sleepiness: ${timerCounter}`
@@ -60,94 +54,79 @@ class PuppyDoggie {
         sleepButton.setAttribute('type', 'button');
         sleepButton.innerText = `got to sleep lil ${this.name}`
 
-        this.startAging();
+        this.startSleepiness();
         this.startGettingHungry();
-        this.startBoredom()
-        this.startSleepiness()
+        this.startGettingBored();
     }
     startSleepiness(){
         let myTimer = setInterval(() => {
             const i = timerCounter
             timerCounter ++;
-            console.log(`${timerCounter} <- timer counter  `);
-            console.log(`${i} <-- I`)
             sleepiness.innerText = `Sleepiness: ${timerCounter}`
-
-            }, 250);;
-
+            }, 15000);
         sleepButton.addEventListener('click', e => {
-            
-            if (myTimer === -1){
-                myTimer = setInterval(() => {
-                    const i = timerCounter
-                    timerCounter ++;
-                    console.log(`${timerCounter} <- timer counter  `);
-                    sleepiness.innerText = `Sleepiness: ${timerCounter}`
-                    console.log(`${i} <-- I`)
-                    }, 250);
-            } else { 
                 timerCounter = 0;
                 sleepiness.innerText = `Sleepiness: ${timerCounter}`
                 clearInterval(myTimer);
                 myTimer = -1
-                
-                }
-                
+                imgdoggie.setAttribute('src', 'img/puppysleep.gif');
+                let napTime = setTimeout(() => {
+                    myTimer = setInterval(() => {
+                        const i = timerCounter
+                        timerCounter ++;
+                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        sleepiness.innerText = `Sleepiness: ${timerCounter}`
+                        }, 15000);
+                }, 5000)
           });
-          
-        
     }   
-    startAging(){
-        const doggieAge = setInterval(() => {
-            this.age ++;
-            age.innerText = `Age: ${this.age}`;
-        }, 1009);
-      }
-      startGettingHungry(){
+    startGettingHungry(){
+        let hungerTimer = setInterval(() => {
+            const i = hungerTimerCounter;
+            hungerTimerCounter ++;
+            hungerEl.innerText = `Hunger: ${hungerTimerCounter}`;
+            }, 15000);
         feedButton.addEventListener('click', e => {
-            alert.innerText = ``; 
-            // hungerEl.innerText = `Hunger: 0`;
-            imgdoggie.setAttribute('src', 'img/puppyeating.gif');
-            clearInterval(soHungry);
-            const dogEating = setInterval(() => {
-                const i = this.mealTime
-                this.mealTime ++;
-                console.log(`yum ${this.mealTime}`);
-                console.log(i)
-                if(this.mealTime===i+1){
-                    clearInterval(soHungry);
-                    this.startGettingHungry();
-                    clearInterval(dogEating);
-                    imgdoggie.setAttribute('src', 'img/puppypix.gif');
-                    this.hunger = 0
-                    
-
-                }
-                }, 5000);
-          });
-        const soHungry = setInterval(() => {
-            this.hunger++
-            if(this.hunger === 5){
-                const nav = document.querySelector('nav');
-                alert.innerText = `WOOF WOOF lil ${this.name} is hungry!!`; 
-                nav.appendChild(alert)
-                // imgdoggie.setAttribute('src', 'img/puppysleepy.gif');
-            }
-            hungerEl.innerText = `Hunger: ${this.hunger}`;
-        }, 5000);
-    } 
-    
-    startBoredom(){
-        playButton.addEventListener('click', e => {
-            boredom.innerText = `Boredom: 0`;
-            this.boredom = 0;
-          });
-        const boredToDeath = setInterval(() => {
-            this.boredom ++;
-            boredom.innerText = `Boredom: ${this.boredom}`;
-        }, 6000);
-        
+                hungerTimerCounter = 0;
+                hungerEl.innerText = `Hunger: ${hungerTimerCounter}`
+                clearInterval(hungerTimer);
+                hungerTimer = -1;
+                imgdoggie.setAttribute('src', 'img/puppyeating.gif');
+                const dinnerTime = setTimeout(() => {
+                    hungerTimer = setInterval(() => {
+                        const i = hungerTimerCounter;
+                        hungerTimerCounter ++;
+                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        hungerEl.innerText = `Hunger: ${hungerTimerCounter}`
+                    }, 15000);
+                }, 5000)
+        });
     }
+    startGettingBored(){
+        let boredTimer = setInterval(() => {
+            const i = boredTimerCounter;
+            boredTimerCounter ++;
+            boredom.innerText = `Boredom: ${boredTimerCounter}`;
+            }, 15000);
+        playButton.addEventListener('click', e => {
+                boredTimerCounter = 0;
+                boredom.innerText = `Boredom: ${boredTimerCounter}`
+                clearInterval(boredTimer);
+                boredTimer = -1;
+                imgdoggie.setAttribute('src', 'img/puppyhappy.gif');
+                const playTime = setTimeout(() => {
+                    boredTimer = setInterval(() => {
+                        const i = boredTimerCounter;
+                        boredTimerCounter ++;
+                        imgdoggie.setAttribute('src', 'img/puppypix.gif');
+                        boredom.innerText=`Boredom: ${boredTimerCounter}`
+                    }, 15000)
+                    
+                }, 5000)
+
+        });
+    }
+    
     
     
 }
