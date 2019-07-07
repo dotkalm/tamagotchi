@@ -140,7 +140,7 @@ class PuppyDoggie {
         const doggieAge = setInterval(() => {
             this.age ++;
             age.innerText = `Age: ${this.age}`;
-        }, 600);
+        }, 6000);
       }
     pickImage(){
         const imagePicker = setInterval(() => {
