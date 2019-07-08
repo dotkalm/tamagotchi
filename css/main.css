@@ -20,14 +20,14 @@ nav{
     padding: 1px;
     background-color: white;
     display: flex;
-    width: 100%
+    width: 60%
     
     
 }
 .column {
  
  float: left;
- font-size: .5em;
+ font-size: 1.5em;
  margin: 0 auto;
  padding: 1px;
  display: contents;
@@ -39,7 +39,7 @@ nav{
     animation: test 5s infinite;
     max-height: 300px;
     margin: 0px;
-    width: 200px
+    
     
 }
 @keyframes test{
@@ -63,7 +63,7 @@ nav{
     display: inline-table;
 }
 #column1 {
-    width: 100px;
+    width: 80px;
     background-color: #ffffff; 
     height: 10px;
     display: initial;
@@ -72,7 +72,7 @@ nav{
     text-align: right;
 }
 #column2 {
-    width: 100%;
+    width: 40%;
     margin: 0 auto;
     padding: 5px;
     text-align: center;
