@@ -1,12 +1,13 @@
+const dogName = document.querySelector('#dogName');
 const rightColumn = document.querySelector('#column3');
 const leftColumn = document.querySelector('#column1');
-const age = document.createElement('h3');
-rightColumn.appendChild(age);
-const hungerEl = document.createElement('h3');
-const boredom = document.createElement('h3');
-const sleepiness = document.createElement('h3');
-rightColumn.appendChild(sleepiness);
-rightColumn.appendChild(boredom);
+const age = document.createElement('p');
+dogName.appendChild(age);
+const hungerEl = document.createElement('p');
+const boredom = document.createElement('p');
+const sleepiness = document.createElement('p');
+dogName.appendChild(sleepiness);
+dogName.appendChild(boredom);
 const alert = document.createElement('h1');
 const feedButton = document.createElement('button');
 const playButton = document.createElement('button');
@@ -14,6 +15,7 @@ const sleepButton = document.createElement('button');
 const imgdoggie = document.createElement('img');
 imgdoggie.setAttribute('src', 'img/puppypix.gif');
 imgdoggie.setAttribute("id", "puppy-begin");
+dogName.appendChild(hungerEl);
 let sleepBoolean = false;
 let timerCounter = 0;
 let hungerTimerCounter = 0;
@@ -29,14 +31,17 @@ class PuppyDoggie {
     initPup(){
         const centerColumn = document.querySelector('#column2');
         const rightColumn = document.querySelector('#column3');
-        const puppersDiv = document.querySelector('#puppers');
-        puppersDiv.appendChild(imgdoggie);
         
+        const puppersDiv = document.querySelector('#dogHouse');
+        
+        centerColumn.appendChild(puppersDiv)
+        centerColumn.appendChild(dogName)
+        puppersDiv.appendChild(imgdoggie);
         const newDoggie = document.createElement('h2');
         newDoggie.innerText = `Lil ${this.name}`;
-        centerColumn.appendChild(newDoggie);
+        dogName.appendChild(newDoggie);
         
-        rightColumn.appendChild(hungerEl);
+        
         hungerEl.innerText = `Hunger: ${hungerTimerCounter}`;
         age.innerText = `Age: ${this.age}`;
         boredom.innerText = `Boredom: ${this.boredom}`;

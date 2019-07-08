@@ -9,6 +9,8 @@ h3 {
 body {
     margin: 0 auto;
     padding: 0;
+    align-content: left;
+    flex-direction: column;
 }
 nav{
     padding: 20px
@@ -18,13 +20,18 @@ nav{
     padding: 1px;
     background-color: white;
     display: flex;
+    width: 100%
+    
+    
 }
 .column {
  
  float: left;
- font-size: 1.5em;
+ font-size: .5em;
  margin: 0 auto;
  padding: 1px;
+ display: contents;
+ 
  
  
 }
@@ -32,6 +39,7 @@ nav{
     animation: test 5s infinite;
     max-height: 300px;
     margin: 0px;
+    width: 200px
     
 }
 @keyframes test{
@@ -50,29 +58,32 @@ nav{
     80% {transform: scale(.85)}
     100% {transform: scale(1.0)}
 }
-
+#dogName {
+    color: black;
+    display: inline-table;
+}
 #column1 {
-    width: 10%;
+    width: 100px;
     background-color: #ffffff; 
-    height: 400px;
+    height: 10px;
+    display: initial;
     margin: 0 auto;
     padding: 5px;
     text-align: right;
 }
 #column2 {
-    width: 70%;
-    height: 400px;
+    width: 100%;
     margin: 0 auto;
     padding: 5px;
     text-align: center;
-    display: contents;
-    flex-direction: row;
+    display: inline-flex;
+    flex: auto;
     
 }
-#puppers{
+#dogHouse{
     animation: pulse 15s infinite;
-    max-width: 300px;
     margin: 0 auto;
+    display: contents;
     
 }
 @keyframes pulse{
@@ -84,11 +95,15 @@ nav{
 #column3 {
     background-color: #ffffff;
     height: 400px;
+    width: 100%;
     margin: 0 auto;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
 }
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
   }
+
